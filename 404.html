@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Sayfa Bulunamadı</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+    <div class="container fade-in">
+        <div class="error-content text-center">
+            <h1>404</h1>
+            <h2>Sayfa Bulunamadı</h2>
+            <p>Aradığınız sayfa mevcut değil veya taşınmış olabilir.</p>
+            <a href="/" class="btn-primary">Ana Sayfaya Dön</a>
+        </div>
+    </div>
+
+    <style>
+        .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-content h1 {
+            font-size: 6rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .error-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-content p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color-dark);
+        }
+    </style>
+</body>
+</html> 

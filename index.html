@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Henenke.com</title>
+    <link rel="stylesheet" href="/css/common.css">
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
         }
 
         @keyframes gradient {
@@ -22,96 +17,104 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        @keyframes glowText {
-            0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073; }
-            50% { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         @keyframes rainbow {
             0% { color: #ff0000; }
-            20% { color: #ffff00; }
-            40% { color: #00ff00; }
-            60% { color: #00ffff; }
-            80% { color: #ff00ff; }
+            16.666% { color: #ff8800; }
+            33.333% { color: #ffff00; }
+            50% { color: #00ff00; }
+            66.666% { color: #00ffff; }
+            83.333% { color: #0000ff; }
             100% { color: #ff0000; }
         }
 
         @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes scale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            min-height: 100vh;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .text-container {
+            text-align: center;
+            animation: fadeIn 1s ease-out;
         }
 
         h1 {
             color: white;
-            text-align: center;
-            font-size: 3.5em;
-            position: relative;
-            animation: 
-                fadeIn 1.5s ease-out,
-                floating 3s ease-in-out infinite,
-                rainbow 8s linear infinite,
-                glowText 2s ease-in-out infinite;
-            display: inline-block;
-            transform-origin: center;
+            font-size: 4em;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            animation: scale 3s ease-in-out infinite;
         }
 
-        .wave-text {
+        .rainbow-letter {
+            display: inline-block;
+        }
+
+        .wave-letter {
             display: inline-block;
             animation: wave 2s ease-in-out infinite;
-            transform-origin: bottom center;
         }
 
-        h1::after {
-            content: '|';
-            position: absolute;
-            margin-left: 5px;
-            animation: blink 1s step-end infinite;
-            color: white;
+        .wave-letter:nth-child(1) { 
+            animation-delay: 0.0s; 
+            color: #ff0000; /* Kırmızı */
         }
-
-        .text-container {
-            position: relative;
+        .wave-letter:nth-child(2) { 
+            animation-delay: 0.1s; 
+            color: #ff8800; /* Turuncu */
         }
-
-        .text-container::before,
-        .text-container::after {
-            content: '✨';
-            position: absolute;
-            font-size: 2rem;
-            animation: floating 2s ease-in-out infinite;
+        .wave-letter:nth-child(3) { 
+            animation-delay: 0.2s; 
+            color: #ffff00; /* Sarı */
         }
-
-        .text-container::before {
-            left: -40px;
-            animation-delay: 0.3s;
+        .wave-letter:nth-child(4) { 
+            animation-delay: 0.3s; 
+            color: #00ff00; /* Yeşil */
         }
-
-        .text-container::after {
-            right: -40px;
-            animation-delay: 0.6s;
+        .wave-letter:nth-child(5) { 
+            animation-delay: 0.4s; 
+            color: #00ffff; /* Açık Mavi */
         }
-
-        .buttons-container {
-            display: none;
+        .wave-letter:nth-child(6) { 
+            animation-delay: 0.5s; 
+            color: #0000ff; /* Mavi */
+        }
+        .wave-letter:nth-child(7) { 
+            animation-delay: 0.6s; 
+            color: #ff00ff; /* Mor */
         }
 
         .contact-btn, .about-btn, .youtube-btn {
@@ -123,7 +126,6 @@
             text-decoration: none;
             font-size: 1em;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
         }
 
         .youtube-btn {
@@ -136,83 +138,204 @@
             border-color: #64c8ff;
         }
 
-        .contact-btn:hover, .about-btn:hover {
+        .github-btn {
+            background-color: rgba(51, 51, 51, 0.2);
+            border-color: #333;
+            padding: 10px 20px;
+            color: white;
+            border: 2px solid white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background-color: #333;
             transform: scale(1.1);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        .youtube-btn:hover {
-            background-color: #ff0000;
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+            margin-right: auto;
         }
 
-        .about-btn:hover {
-            background-color: #64c8ff;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .youtube-btn:hover {
-            animation: pulse 1s infinite;
-        }
-
-        header {
+        .menu {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
+            left: -250px;
+            height: 100vh;
+            width: 250px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: flex-end;
-            gap: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding-top: 60px;
+            transition: left 0.3s ease;
             z-index: 1000;
-            animation: fadeIn 1s ease-out;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        header .contact-btn, 
-        header .youtube-btn {
-            padding: 10px 20px;
-            font-size: 1em;
+        .menu.active {
+            left: 0;
         }
 
-        @media (max-width: 600px) {
-            header {
-                justify-content: center;
+        .menu a {
+            display: block;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-close:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            color: #64c8ff;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #64c8ff;
+        }
+
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            header a:not(.menu-icon) {
+                display: none;
+            }
+
+            h1 {
+                font-size: 3em;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="iletisim.html" class="contact-btn">İletişime Geç</a>
-        <a href="hakkimizda.html" class="about-btn">Hakkımızda</a>
-        <a href="https://youtube.com" target="_blank" class="youtube-btn">YouTube'a Git</a>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="header-buttons">
+            <a href="/" class="contact-btn">Ana Sayfa</a>
+            <a href="/hakkimizda.html" class="about-btn">Hakkımızda</a>
+            <a href="/iletisim.html" class="contact-btn">İletişime Geç</a>
+            <a href="https://www.youtube.com/@henenke" target="_blank" class="youtube-btn">YouTube'a Git</a>
+            <a href="https://github.com/Henenke" target="_blank" class="github-btn">GitHub</a>
+        </div>
     </header>
-    <div class="text-container">
-        <h1>
-            <span class="wave-text">M</span>
-            <span class="wave-text">e</span>
-            <span class="wave-text">r</span>
-            <span class="wave-text">h</span>
-            <span class="wave-text">a</span>
-            <span class="wave-text">b</span>
-            <span class="wave-text">a</span>
-            &nbsp;
-            <span class="wave-text">C</span>
-            <span class="wave-text">u</span>
-            <span class="wave-text">r</span>
-            <span class="wave-text">s</span>
-            <span class="wave-text">o</span>
-            <span class="wave-text">r</span>
-        </h1>
+
+    <div class="menu">
+        <div class="menu-close" onclick="toggleMenu()">←</div>
+        <a href="/">Ana Sayfa</a>
+        <a href="/hakkimizda.html">Hakkımızda</a>
+        <a href="/iletisim.html">İletişim</a>
+        <a href="https://www.youtube.com/@henenke" target="_blank">YouTube'a Git</a>
+        <a href="https://github.com/Henenke" target="_blank">GitHub</a>
     </div>
+
+    <div class="main-container">
+        <div class="text-container">
+            <h1>
+                <span class="wave-letter">H</span>
+                <span class="wave-letter">E</span>
+                <span class="wave-letter">N</span>
+                <span class="wave-letter">E</span>
+                <span class="wave-letter">N</span>
+                <span class="wave-letter">K</span>
+                <span class="wave-letter">E</span>
+            </h1>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Henenke</h3>
+                <p>Oyun, Kodlama ve İşlevsellik</p>
+            </div>
+            <div class="footer-section">
+                <h3>Bağlantılar</h3>
+                <a href="gizlilik.html">Gizlilik Politikası</a><br>
+                <a href="kullanim-kosullari.html">Kullanım Koşulları</a><br>
+                <a href="cerez-politikasi.html">Çerez Politikası</a>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <a href="https://www.youtube.com/@henenke" target="_blank">YouTube</a><br>
+                <a href="https://github.com/Henenke" target="_blank">GitHub</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Henenke. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const menu = document.querySelector('.menu');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!menu.contains(event.target) && !menuIcon.contains(event.target) && menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
