@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henenke.com</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes glowText {
+            0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073; }
+            50% { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            20% { color: #ffff00; }
+            40% { color: #00ff00; }
+            60% { color: #00ffff; }
+            80% { color: #ff00ff; }
+            100% { color: #ff0000; }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 3.5em;
+            position: relative;
+            animation: 
+                fadeIn 1.5s ease-out,
+                floating 3s ease-in-out infinite,
+                rainbow 8s linear infinite,
+                glowText 2s ease-in-out infinite;
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        .wave-text {
+            display: inline-block;
+            animation: wave 2s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        h1::after {
+            content: '|';
+            position: absolute;
+            margin-left: 5px;
+            animation: blink 1s step-end infinite;
+            color: white;
+        }
+
+        .text-container {
+            position: relative;
+        }
+
+        .text-container::before,
+        .text-container::after {
+            content: '✨';
+            position: absolute;
+            font-size: 2rem;
+            animation: floating 2s ease-in-out infinite;
+        }
+
+        .text-container::before {
+            left: -40px;
+            animation-delay: 0.3s;
+        }
+
+        .text-container::after {
+            right: -40px;
+            animation-delay: 0.6s;
+        }
+
+        .buttons-container {
+            display: none;
+        }
+
+        .contact-btn, .about-btn, .youtube-btn {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .youtube-btn {
+            background-color: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+        }
+
+        .about-btn {
+            background-color: rgba(100, 200, 255, 0.2);
+            border-color: #64c8ff;
+        }
+
+        .contact-btn:hover, .about-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .youtube-btn:hover {
+            background-color: #ff0000;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .about-btn:hover {
+            background-color: #64c8ff;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .youtube-btn:hover {
+            animation: pulse 1s infinite;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            z-index: 1000;
+            animation: fadeIn 1s ease-out;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header .contact-btn, 
+        header .youtube-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="iletisim.html" class="contact-btn">İletişime Geç</a>
+        <a href="hakkimizda.html" class="about-btn">Hakkımızda</a>
+        <a href="https://youtube.com" target="_blank" class="youtube-btn">YouTube'a Git</a>
+    </header>
+    <div class="text-container">
+        <h1>
+            <span class="wave-text">M</span>
+            <span class="wave-text">e</span>
+            <span class="wave-text">r</span>
+            <span class="wave-text">h</span>
+            <span class="wave-text">a</span>
+            <span class="wave-text">b</span>
+            <span class="wave-text">a</span>
+            &nbsp;
+            <span class="wave-text">C</span>
+            <span class="wave-text">u</span>
+            <span class="wave-text">r</span>
+            <span class="wave-text">s</span>
+            <span class="wave-text">o</span>
+            <span class="wave-text">r</span>
+        </h1>
+    </div>
+</body>
+</html>
